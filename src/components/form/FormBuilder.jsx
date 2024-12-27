@@ -23,7 +23,6 @@ function FormBuilder({onSubmit, fields=[]}) {
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(formData);
         onSubmit(formData);
     }
 
@@ -46,8 +45,20 @@ function FormBuilder({onSubmit, fields=[]}) {
                                              required={field.required}
                                              className=""
                                          />
-
                                      </div>
+                                case "search":
+                                    return <div key={field.name}>
+                                        <InputField
+                                            name={field.name}
+                                            label={field.label}
+                                            placeholder={field.placeholder}
+                                            type={field.type}
+                                            value={field.value}
+                                            onChange={handleChange}
+                                            required={field.required}
+                                            className=""
+                                        />
+                                    </div>
                                 case "number":
                                     return <div key={field.name}>
                                         <InputField
@@ -59,12 +70,16 @@ function FormBuilder({onSubmit, fields=[]}) {
                                             onChange={handleChange}
                                         />
                                     </div>
+                                case "textarea":
+                                    return <div key={field.name}>
+
+                                    </div>
                             }
                         })
                     }
                 </div>
                 <div className="flex justify-end gap-2">
-                    <button>Cancel</button>
+                    <button type={"reset"}>Cancel</button>
                     <button type="submit">Save</button>
                 </div>
             </form>
@@ -75,8 +90,7 @@ function FormBuilder({onSubmit, fields=[]}) {
 FormBuilder.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     fields: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
+    title: PropTypes.string.isRequired
     // isLoading: PropTypes.bool.isRequired,
 }
 

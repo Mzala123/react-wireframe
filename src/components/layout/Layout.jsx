@@ -1,12 +1,15 @@
 import Sidebar from './Sidebar.jsx';
 import AppBar from "./AppBar.jsx";
 import {useEffect, useRef, useState} from "react";
-import InputField from "../form/InputField.jsx";
 import FormBuilder from "../form/FormBuilder.jsx";
+import PageLoader from "../ui/PageLoader.jsx";
+import {Outlet} from "react-router-dom";
+
 
 function Layout() {
 
     const [isOpen, setIsOpen] = useState(false);
+
     const sideBarRef = useRef(null);
 
 
@@ -63,12 +66,7 @@ function Layout() {
             <div className="flex flex-col w-full">
                 <AppBar onOpen={handleToggleMenu}/>
                 <div className="transition-all p-3 relative top-16 h-screen lg:ml-72">
-                    <FormBuilder
-                        onSubmit={handleSubmit}
-                        fields={fields}
-                        title="Hie"
-                    />
-
+                    <Outlet/>
                 </div>
             </div>
         </div>
